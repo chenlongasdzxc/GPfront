@@ -1,4 +1,7 @@
 <template>
+  <div class="bodyStyle">
+
+    <div class="formStyle">
   <el-form v-model="infoform" class="infoform_class">
       <el-input v-model="infoform.userName" ></el-input>
       <el-input v-model="infoform.userPassword"  ></el-input>
@@ -6,11 +9,17 @@
       <el-input v-model="infoform.personalId"></el-input>
       <el-input v-model="infoform.email" ></el-input>
   </el-form>
+    </div>
 
+    <vue-canvas-nest :config="{color:'1,2,3', count: 300 ,opacity: 0.3}"></vue-canvas-nest>
+  </div>
 </template>
 
+
 <script>
+  import vueCanvasNest from 'vue-canvas-nest'
   export default {
+    components:{vueCanvasNest},
     data(){
       return{
         infoform:{
@@ -36,10 +45,20 @@
 
 
 <style>
+
+  .formStyle{
+    border: 1px solid gray;
+  }
  .infoform_class{
    width: 10%;
    height: 20%;
    margin-left: 45%;
-   margin-top: 10%;
  }
+  .bodyStyle{
+    background-color: whitesmoke;
+    border: 2px solid whitesmoke;
+    margin-left: 20%;
+    width: 60%;
+    height: 100%;
+  }
 </style>

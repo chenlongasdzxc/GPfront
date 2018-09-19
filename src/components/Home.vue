@@ -8,7 +8,7 @@
       <el-button type="primary" @click="show" class="input">注册</el-button>
     </el-form-item>
   </el-form>
-  <vue-canvas-nest :config="{color:'0,0,0', count: 300 ,opacity: 0.3}" ></vue-canvas-nest>
+  <vue-canvas-nest :config="{color:'1,2,3', count: 300 ,opacity: 0.3}" ></vue-canvas-nest>
 </div>
 </template>
 
@@ -31,14 +31,19 @@
        this.$http.post('http://localhost:8081/login',formData).then((response)=>{
          if(response.data.code=='200'){
            console.log(response.data)
-           debugger
            this.$router.push({path:'/info'})
          }else {
           if (response.data.code=='400'){
-            alert('密码错误')
+            this.$message({
+              message:'密码错误',
+              center:true,
+            });
           }
           if (response.data.code=='401'){
-            alert('账号不存在')
+            this.$message({
+              message:'账号不存在',
+              center:true,
+            })
           }
          }
        },function () {
@@ -56,7 +61,7 @@
   .loginForm{
     width: 18%;
     height: 300px;
-    border: 1px solid gray;
+    border: 1px solid gainsboro;
     text-align: center;
     margin-left: 70%;
     margin-top: 150px;
