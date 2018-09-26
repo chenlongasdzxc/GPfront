@@ -11,20 +11,18 @@
             <el-input v-model="registForm.personalId" placeholder="请输入身份证号码" class="registInput"></el-input>
             <el-input v-model="registForm.email" placeholder="请输入邮箱" class="registInput"></el-input>
             <el-button type="primary" @click="registSubmit" class="input">提交</el-button>
-            <el-button type="primary" @click="" class="input">重置</el-button>
+            <el-button type="primary" @click="remark" class="input">重置</el-button>
           </el-form>
+            <i class="iconfont icon-canting"></i>
         </div>
 
 
-          <vue-canvas-nest :config="{color:'1,2,3', count: 300 ,opacity: 0.3}"></vue-canvas-nest>
         </div>
 
 </template>
 
 <script>
-  import vueCanvasNest from 'vue-canvas-nest'
   export default {
-    components:{vueCanvasNest},
     data(){
       return{
         registForm:{
@@ -34,17 +32,28 @@
           email:'',
           phone:'',
           personalId:'',
+        },
+        rules:{
+          userName:[
+            {required:true,message:'请输出用户名',trigger:'blur'}
+          ],
+          userPassword:[
+            {required:true,message:'请输入密码',trigger:'blur'}
+          ],
+          personalId:[
+            {required:true,message:'请输入个人身份证号码',trigger:'blur'}
+          ],
+          phone:[
+            {required:true,message:'请输入电话号码',trigger:'blur'}
+          ],
         }
       }
-    },
-    created:{
-
     },
 
     methods:{
       registSubmit:function () {
         let registData = JSON.stringify(this.registForm);
-        this.$http.post('http://localhost:8081/addUser',registData).then((response) =>{
+        this.$http.post('http://localhost:8083/addUser',registData).then((response) =>{
           if (response.data.code=='200'){
             this.$message({
               message:'注册成功',
@@ -59,7 +68,11 @@
         },function () {
           console.log('失败啦')
           })
-    }
+    },
+      remark:function () {
+
+      }
+
   }
   }
 </script>

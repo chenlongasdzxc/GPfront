@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Home from '../components/Home'
 import Regist from '../components/Regist'
 import Info from  '../components/Info'
+import Weather from '../components/Pages/Weather'
+
 Vue.use(Router)
 
 export default new Router({
@@ -19,6 +21,10 @@ export default new Router({
       path: '/info',
       name: 'info',
       component: Info,
+    },{
+      path: '/weather',
+      name: 'weather',
+      component: Weather
     }
   ]
 })

@@ -8,14 +8,11 @@
       <el-button type="primary" @click="show" class="input">注册</el-button>
     </el-form-item>
   </el-form>
-  <vue-canvas-nest :config="{color:'1,2,3', count: 300 ,opacity: 0.3}" ></vue-canvas-nest>
 </div>
 </template>
 
 <script>
-  import vueCanvasNest from 'vue-canvas-nest'
   export default {
-    components:{vueCanvasNest},
     data(){
       return{
         loginForm:{
@@ -28,7 +25,7 @@
 
      onSubmit:function () {
        let formData = JSON.stringify(this.loginForm);
-       this.$http.post('http://localhost:8081/login',formData).then((response)=>{
+       this.$http.post('http://localhost:8083/login',formData).then((response)=>{
          if(response.data.code=='200'){
            console.log(response.data)
            this.$router.push({path:'/info'})
