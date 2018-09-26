@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="divClass">
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
+      <el-menu  class="el-menu-demo" mode="horizontal">
         <el-menu-item index="1">处理中心</el-menu-item>
         <el-submenu index="2">
           <template slot="title">我的工作台</template>
@@ -16,20 +16,51 @@
           </el-submenu>
         </el-submenu>
         <el-menu-item index="3" disabled>消息中心</el-menu-item>
+        <el-form :model="cityform">
+        <el-input v-model="cityform.city" class="cityinput"></el-input>
+        <el-button type="primary" icon="el-icon-search" @click="show">搜索</el-button>
+        </el-form>
       </el-menu>
     </div>
-    <i class="icon-canting"></i>
+
   </div>
 </template>
 
 <script>
   export default {
+    data(){
+      return{
+        cityform:{
+          city:'',
+        },
+
+      }
+
+    },
+    methods:{
+      show:function () {
+        const that = this;
+        const form = JSON.stringify(that.cityform)
+        this.$http.post('http://localhost:8083/weather',form).then((response)=>{
+          debugger
+          if (response.data.code=='200'){
+            console.log(response.data);
+          }
+          if (response.data.code=='500'){
+            this.$message({
+              message:'error'
+            })
+          }
+        })
+      }
+    }
 
   }
 </script>
 
 <style>
-  .divClass{
-    text-align: center;
+  .cityinput{
+    width: 20%;
   }
+
 </style>
